@@ -8,6 +8,7 @@ test("throw error when no projectId provided", () => {
     outdir: mkdtemp(),
     projectId: undefined as any,
     storageLocation: "US",
+    overrideEnv: true,
   };
 
   // THEN
@@ -38,6 +39,7 @@ test("throw error when no storageLocation provided", () => {
     outdir: mkdtemp(),
     projectId: "projectId",
     storageLocation: undefined as any,
+    overrideEnv: true,
   };
 
   // THEN
