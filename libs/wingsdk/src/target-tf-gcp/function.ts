@@ -12,7 +12,7 @@ import {
   NameOptions,
   ResourceNames,
 } from "../shared/resource-names";
-import { IInflightHost } from "../std";
+import { IInflightHost, IResource } from "../std";
 
 const FUNCTION_NAME_OPTS: NameOptions = {
   maxLen: 32,
@@ -20,12 +20,17 @@ const FUNCTION_NAME_OPTS: NameOptions = {
   case: CaseConventions.LOWERCASE,
 };
 
+// TODO(wiktor.zajac) update for gcp
+export interface ScopedRoleAssignment {
+  /** Role definition to assign */
+  readonly roleDefinitionName: string;
+}
+
 /**
  * GCP implementation of `cloud.Function`.
  *
  * @inflight `@winglang/wingsdk.cloud.IFunctionClient`
  */
-
 export class Function extends cloud.Function {
   private readonly function: CloudfunctionsFunction;
 
@@ -100,6 +105,11 @@ export class Function extends cloud.Function {
   public get functionName(): string {
     return this.function.name;
   }
+
+  public addPermission(
+    _scopedResource: IResource,
+    _scopedRoleAssignment: ScopedRoleAssignment
+  ) {}
 
   // TODO: implement with https://github.com/winglang/wing/issues/1282
   public _toInflight(): string {

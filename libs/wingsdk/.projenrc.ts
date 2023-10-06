@@ -84,8 +84,11 @@ const project = new cdk.JsiiProject({
     // shared client dependencies
     "ioredis",
     "jsonschema",
+	// google cloud dependencies
+	"@google-cloud/bigtable@5.0.0"
   ],
   devDeps: [
+
     `@cdktf/provider-aws@^15.0.0`, // only for testing Wing plugins
     "wing-api-checker",
     "bump-pack",
