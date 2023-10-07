@@ -12,13 +12,17 @@ import {
   NameOptions,
   ResourceNames,
 } from "../shared/resource-names";
-import { IInflightHost } from "../std";
+import { IInflightHost, IResource } from "../std";
 
 const FUNCTION_NAME_OPTS: NameOptions = {
   maxLen: 32,
   disallowedRegex: /[^a-z0-9]+/g,
   case: CaseConventions.LOWERCASE,
 };
+
+export interface ScopedRoleAssignment {
+	readonly roleDefinitionName: string;
+}
 
 /**
  * GCP implementation of `cloud.Function`.
@@ -99,6 +103,12 @@ export class Function extends cloud.Function {
 
   public get functionName(): string {
     return this.function.name;
+  }
+
+  public addPermission(
+	  _scopedResource: IResource, 
+	  _scopedRoleAssignment: ScopedRoleAssignment
+  ) {
   }
 
   // TODO: implement with https://github.com/winglang/wing/issues/1282
